@@ -11,7 +11,7 @@ class Program
         string percentageNumber = Console.ReadLine();
         string gradeLetter = "";
         string gradeSymbol = "";
-        if (float.TryParse(percentageNumber, out float grade))
+        if (float.TryParse(percentageNumber, out float grade)) //An easy way to convert string into int if needed
         {
             
             if (grade >=94)
