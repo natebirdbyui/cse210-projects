@@ -1,0 +1,101 @@
+@startuml Scripture Memorizer
+
+Class Program
+{
+    +DisplayScripture()
+    'This should display the scripture being called from other classes.
+    'Also from the program class it should run the _hideWord bool and generate a random scripture and hide words.
+
+    +_hideWord : true
+    'bool this will run the app
+
+    +Reference(reference.GetRandomScriptureReference())
+        
+    +Scripture(book, scriptureData.GetChapter(), scriptureData.GetStartVerse(), scriptureData.GetEndVerse(), scriptureData.GetText())
+        
+
+}
+
+Scripture -> Program
+Class Scripture
+{
+    +DisplayScripture() : void
+    'This will display the scripture
+    +HideRandomWord() : void
+    'This will hide a random word
+    +AllWordsHidden() : bool
+    'This will check if all words are hidden
+    +Scripture(book, chapter, startVerse, endVerse, text) : void
+    +GetBook() : string
+    +SetBook() : string
+    +GetChapter() : int
+    +SetChapter() : int
+    +GetStartVerse() : int
+    +SetStartVerse() : int
+    +GetEndVerse() : int
+    +SetEndVerse() : int
+    +GetText() : string
+    +SetText() : string
+
+    - _book: string
+    - _chapter: int
+    - _startVerse: int
+    - _endVerse: int
+    - _text: string
+    - _words: List<string>
+    - _random: Random: new
+    'These should all pull from Reference Class-not sure if I need get&set for text if it's being called in Word Class.
+
+
+}
+Word -> Scripture
+Class Word
+{
+    +HideWord() : void
+    'This will be the method to hide a word
+    +DisplayScripture() : void
+    'This will display the scripture and test if the word is hidden
+    +GetText() : string
+    +GetIsHidden() : bool
+    +SetText() : string
+    +IsHidden: bool
+
+    -_hideWord : bool
+    -_text : string
+    'create a bool to hide the word and have it called in the Program Class.
+    'If I can't then it will be called in the Scripture Class
+}
+Reference --* Scripture
+
+Class Reference
+'This may be an easier way to pull scriptures
+{
+    
+    + _scriptures : Dictionary<string, (int chapter, int startVerse, int endVerse, string text)>
+    +ScriptureReference(reference, scripture.chapter, scripture.startVerse, scripture.endVerse, scripture.text)
+    'This will pull the scripture reference
+    +GetRandomScriptureReference() : string
+    'This will get a random scripture reference
+}
+ScriptureData --* Reference
+Class ScriptureData
+'This will help bring the data over to the program class
+{
+    +GetScripture() : string
+    +GetBook() : string
+    +GetChapter() : int
+    +GetStartVerse() : int
+    +GetEndVerse() : int
+    +GetText() : string
+    +GetWords() : List<string>
+    +GetRandom() : Random
+    +GetScriptureReference() : List<string>
+    +GetRandomScriptureReference() : string
+    -_book: string
+    -_chapter: int
+    -_startVerse: int
+    -_endVerse: int
+    -_text: string
+}
+
+@enduml
