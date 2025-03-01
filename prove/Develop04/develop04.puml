@@ -1,0 +1,185 @@
+@startuml Mindfulness Program
+'Have a menu system to allow the user to choose an activity.
+
+'Each activity should start with a common starting message that provides the name of the activity, a description,
+'and asks for and sets the duration of the activity in seconds. Then, it should tell the user to prepare to begin and pause for several seconds.
+
+'Each activity should end with a common ending message that tells the user they have done a good job,
+'and pause and then tell them the activity they have completed and the length of time and pauses for several seconds before finishing.
+
+'Whenever the application pauses it should show some kind of animation to the user, such as a spinner, a countdown timer, or periods being displayed to the screen.
+
+'The interface for the program should remain generally true to the one shown in the video demo.
+
+'Provide activities for reflection, breathing, and enumeration, as described below:
+
+Class Program
+{
+    running: bool
+    'run menu
+    +Breathing Activity breathing = new BreathingActivity(sessionDuration1)
+    +ReflectionActivity reflection = new ReflectionActivity(sessionDuration2)
+    +ListingActivity listing = new ListingActivity(sessionDuration3)
+
+    '1. Start Breathing Activity
+    '2. Start Reflection Activity
+    '3. Start Listing Activity
+    '4. Quit
+    '**** USE SWITCH and CASE ****
+}
+
+Class Activity
+{
+    +WelcomeMessage():string
+
+    +LoadingSymbol():void
+    'For periods its:
+    'for (int i = 5; i> 0; i--)
+    '{
+        '    Console.Write(".");
+        '    Thread.Sleep(1000);
+        '
+    
+
+    'For a spinner its:
+    'List<string> animationStrings = new List<string>();
+    'animationStrings.Add("|");
+    'animationStrings.Add("/");
+    'animationStrings.Add("-");
+    'animationStrings.Add("\\"); //you have to do a double because \ is a special character is c# means escapes the next one
+
+    'foreach (string s in animationStrings)
+    '{
+        '    Console.Write(s);
+        '    Thread.Sleep(1000);
+        '    Console.Write("\b \b");
+        '
+    '}
+
+    'DateTime startTime = DateTime.Now;
+    'DateTime endTime = startTime.AddSeconds(10);
+    ' int i = 0;
+    'while (DateTime.Now < endTime)
+    '{
+        '    string s = animationStrings[i];
+        '    Console.Write(s);
+        '    Thread.Sleep(1000);
+        '    Console.Write("\b \b");
+        '    i ++;
+        '    if (i >= animationStrings.Count)
+        '    {
+            '           i = 0;
+            '
+        '}
+        '
+    '}
+
+    +ReadyMessage():string
+    +Congratulations():string
+    +ActivityPrep():string
+    +Activity(string activityName, string activityPrep):void
+    +DotLoadingSymbol():void
+    +CountDownTimer(int seconds):void
+    #_welcomePrompt: string
+    'Welcome to...
+    #_activityPrep :string
+    'This activity...
+    #_sessionDuration : int
+    'When asking how long the session duration
+    #_countDownTimer :int
+    'Countdown
+    'for (int i =5; i > 0; i--)
+    '{
+        '   Console.WriteLine(i);
+        '   Thread.Sleep(1000);
+        '   Console.Write("\b \b") //That means Backslash B space Backslash B, this works for single digits
+        ' //if you want to do double digits then its two back arrows with 2 spaces and two back arrows
+        '
+    '}
+    #_congratulationMessage
+    'You have completed {_sessionDuration} of {Activity,(child Classes)}
+    #_youMayBegin
+    #_activityName
+    #_sessionTimeSeconds
+
+    
+    +GetActivityPrep():string
+    +SetActivityPrep(string ActivityPrep): void
+
+    +GetSessionDuration():string
+    +SetSessionDuration(string sessionDuration): void
+
+    +SessionTimeSeconds(int sessionTimeSeconds):void
+
+    
+    +GetCongratulationMessage():string
+    +SetCongratulationMessage(string congratulationMessage):void
+
+
+}
+
+Activity <|-- BreathingActivity
+Activity <|-- ReflectionActivity
+Activity <|-- ListingActivity
+Program <-- Activity
+
+Class BreathingActivity
+{
+    +BreathingActivity:Activity
+    +BreathingActivity(int sessionTimeSeconds) : base("BreathingActivity", "In this activity, we will help you relax and focus on your breathing.")
+
+    +StartBreathingExercise():void
+
+    -breatheIn="Breath In..."
+    -breatheOut="Breath Out..."
+    
+}
+
+Class ReflectionActivity
+{
+    +ReflectionActivity:Activity
+    +ReflectionActivity(int sessionTimeSeconds) : base("ReflectionActivity", "In this activity, we will help you reflect on your experiences.")
+    +SetTimeSeconds(int sessionTimeSeconds):void
+    +StartReflection():void
+    +ReflectionFollowUp()
+    'How did you feel when it was complete? Follow by LoadingSymbol
+    'What was your favorite thing about this experience? LoadingSymbol
+    
+
+    -_reflectionStatements
+    'A List of Prompts.
+    'Find a way to not duplicate questions until all prompts have been used
+    -_reflectionPrepMessage
+    -Random rand = new Random();
+
+    +GetListResponse():string
+    +SetListResponse(string listResponse):void
+    +GetFollowUpPrompts():string
+    +SetFollowUpPrompts(string followUpPrompts):void
+}
+
+Class ListingActivity
+{
+    +ListingActivity:Activity
+    +ListingActivity(int sessionTimeSeconds) : base("ListingActivity", "In this activity, we will help you focus on the things around you.")
+    +StartListing():void
+
+
+    -listPonder:string
+    -Random rand2 = new Random();
+
+    +GetListPonder():string
+    +SetListPonder(string listPonder):void
+
+}
+
+
+
+
+
+
+
+
+
+
+@enduml
