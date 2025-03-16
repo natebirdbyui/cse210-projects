@@ -1,5 +1,3 @@
-/* The class `EternalGoal` extends `Goals` and implements methods for getting a string representation
-and loading data from a string. */
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
