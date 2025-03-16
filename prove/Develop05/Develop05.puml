@@ -1,0 +1,95 @@
+@startuml Eternal Goals
+
+Goals <|-- SimpleGoal
+Goals <|-- EternalGoal
+Goals <|-- ChecklistGoal
+
+Program <-- Goals
+
+Class Program
+{
+    bool(running): true
+    List<Goals> goals = new List<Goals>();
+}
+
+Abstract Class Goals
+{
+    +Goals(string nameOfGoal, int points)
+    {abstract} +GetStringRepresentation(): string
+    +LoadFromString(string data): void
+    +FromString(string data)
+    +GetNameGoal():string
+    +SetNameGoal(string nameOfGoal):void
+    +GetPoints():int
+    +SetPoints(int points):void
+    +GetGoal():string
+    +SetGoal(string goal):void
+    +GetGoalsCompleted():int
+    +SetGoalsCompleted(int goalsCompleted):void
+    {static}+FromString(string data):Goals
+
+    -List<Goal> goals
+    #_goals
+    #_points
+    #_nameOfGoal
+    #_goalsCompleted
+}
+
+Class SimpleGoal
+{
+    + SimpleGoal(string nameOfGoal, int points) : base(nameOfGoal, points)
+    {abstract}+_nameOfGoal:
+    {abstract}+_goalsCompleted:
+    #_isCompleted:bool
+    +GetStringRepresentation():override string
+    +LoadFromString(string data):override void
+    +SimpleGoal(string nameOfGoal, int points):base(nameOfGoal, points)
+}
+
+Class EternalGoal
+{
+    +EternalGoal(string nameOfGoal, int points):base(nameOfGoal, points)
+    GetStringRepresentation():override string
+    LoadFromString(string data):override void
+}
+
+Class ChecklistGoal
+{
+    -_bonusPoints
+    -_numberOfTimesToComplete
+    -_timesCurrentlyCompleted
+
+    +ChecklistGoal(string nameOfGoal, int points, int numberOfTimesToComplete, int bonusPoints): base(nameOfGoal, points)
+    +GetBonusPoints():int
+    +SetBonusPoints(int bonusPoints):void
+    +GetNumberOfTimesToComplete():int
+    +SetNumberOfTimesToComplete(int numberOfTimesToComplete):void
+    +GetTimesCurrentlyCompleted():int
+    +SetTimesCurrentlyCompleted(int timesCurrentlyCompleted):void
+    +LoadFromString(string data):override void
+    +GetStringRepresentation():override string
+    
+}
+
+
+
+
+Class SaveAndLoad
+{
+    {static}+SaveGoals(List<Goals> goals):void
+    {static}+LoadGoals()
+}
+
+Class LoadingSymbol
+{
+    {static}+LoadingSymbol():void
+}
+
+Class DisplayList
+{
+    +ShowGoals(List<Goals> goals):void
+}
+
+
+
+@enduml
