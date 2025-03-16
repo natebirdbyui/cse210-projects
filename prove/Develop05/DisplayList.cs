@@ -20,7 +20,7 @@ public class DisplayList
             Console.WriteLine("No Goals have been created yet. Please make some! =)");
             return;
         }
-        
+
         int totalPoints = 0;//declare points before the loop
 
         for (int i = 0; i < goals.Count; i++)// this helps count the number of goals in a list
@@ -32,13 +32,13 @@ public class DisplayList
             string progress = GetGoalProgress(goal, ref totalPoints);
 
             //This will display each goal in a format
-            Console.WriteLine($"{i + 1, -3} {goalType, -12} {goalName, -22} {points, -8} {progress}");
+            Console.WriteLine($"{i + 1,-3} {goalType,-12} {goalName,-22} {points,-8} {progress}");
         }
 
         Console.WriteLine(new string('-', 62));//like python print('-'*62)
         Console.WriteLine($"Total Points: {totalPoints}");
         Console.WriteLine(new string('-', 62));
-        
+
     }
     private string GetGoalProgress(Goals goal, ref int totalPoints)
     {
@@ -53,7 +53,7 @@ public class DisplayList
             {
                 return "Not Completed";
             }
-            
+
         }
         else if (goal is EternalGoal eternalGoal)
         {
@@ -62,7 +62,7 @@ public class DisplayList
                 totalPoints += eternalGoal.GetPoints();//add only if completed once
             }
             return "Eternally Active";
-            
+
         }
         else if (goal is ChecklistGoal checklistGoal)
         {
@@ -75,23 +75,23 @@ public class DisplayList
             {
                 totalPoints += bonusPoints;//add points if completed
             }
-            return $"{completedTimes}/{numberOfTimes} (Bonus: {bonusPoints})";              
+            return $"{completedTimes}/{numberOfTimes} (Bonus: {bonusPoints})";
 
-        
+
         }
         else
         {
             return "Unknown";
         }
     }
-    
+
 }
-            
-            
-    
 
-        
 
-    
+
+
+
+
+
 
 

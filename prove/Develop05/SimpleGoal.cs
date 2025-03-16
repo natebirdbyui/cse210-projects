@@ -4,8 +4,8 @@ using System.Threading;
 
 public class SimpleGoal : Goals
 {
-    
-    public SimpleGoal(string nameOfGoal, int points) : base (nameOfGoal, points)
+
+    public SimpleGoal(string nameOfGoal, int points) : base(nameOfGoal, points)
     {
     }
 
@@ -43,5 +43,5 @@ public class SimpleGoal : Goals
         }
     }
 
-    
+
 }

@@ -32,7 +32,7 @@ public abstract class Goals
         _isCompleted = isCompleted;
     }
 
-    
+
     public string GetNameGoal()
     {
         return _nameOfGoal;

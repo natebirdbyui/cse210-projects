@@ -22,7 +22,7 @@ class EternalGoal : Goals
     {
         _isCompleted = true;
         _hasCompletedOnce = true;
-        
+
     }
     public override string GetStringRepresentation()
     {

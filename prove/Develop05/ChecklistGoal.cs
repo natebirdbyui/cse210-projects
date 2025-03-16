@@ -58,5 +58,5 @@ class ChecklistGoal : Goals
             _isCompleted = bool.Parse(parts[6]);
         }
     }
-    
+
 }

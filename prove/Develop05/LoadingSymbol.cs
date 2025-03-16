@@ -13,8 +13,8 @@ public class LoadingSymbol
                 Console.Write(animation[i % animation.Length] + "\r");
                 Thread.Sleep(200);
             }
-        Console.WriteLine(); // Move to next line after animation
+            Console.WriteLine(); // Move to next line after animation
         }
     }
-    
+
 }
