@@ -3,7 +3,8 @@ using System.Threading;
 using System.Collections.Generic;
 using System.IO;
 
-
+// I exceeded the requirements by adding a loading symbol to the program.
+// Also, I added a DisplayList class to display the goals in a list format.
 class Program
 {
     static void Main(string[] args)
