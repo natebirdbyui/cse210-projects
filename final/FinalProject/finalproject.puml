@@ -1,0 +1,118 @@
+@startuml Food Planner
+left to right direction
+
+class Program
+{
+    +Running(): bool
+}
+
+FoodMenu <|-- MainCourse
+FoodMenu <|-- SideCourse
+FoodMenu <|-- Beverages
+FoodMenu <|-- Condiments
+
+GuestCount <-- Seating
+GuestCount <--Budget
+
+abstract class FoodMenu
+{
+    #_menuItems: string
+    #_servingSize: double
+    #_pricePerServing: double
+    
+
+    +GetServingSize(): virtual double 
+    +SetServingSize(servingSize: double): void
+    +GetPricePerServing(): virtual double
+    +SetPricePerServing(pricePerServing: double): void
+    {abstract}+GetMenuItems(): string
+    +SetMenuItems(menuItems: string): void
+
+    +FoodMenu(string menuItems, double servingSize, double pricePerServing): void
+}
+
+class MainCourse
+{
+    +MainCourse(string menuItems, double servingSize, double pricePerServing): base(menuItems, servingSize, pricePerServing)
+
+    +GetMenuItems(): override string
+
+}
+
+class SideCourse
+{
+    +SideCourse(string menuItems, double servingSize, double pricePerServing): base(menuItems, servingSize, pricePerServing)
+
+    +GetMenuItems(): override string
+}
+
+
+class Beverages
+{
+    +Beverages(string menuItems, double servingSize, double pricePerServing): base(menuItems, servingSize, pricePerServing)
+
+    +GetMenuItems(): override string
+}
+
+class Condiments
+{
+    +Condiments(string menuItems, double servingSize, double pricePerServing): base(menuItems, servingSize, pricePerServing)
+
+    +GetMenuItems(): override string
+}
+
+class GuestCount
+{
+    #_guestCount: int
+
+    +GetGuestCount(): int
+    +SetGuestCount(guestCount: int): void
+    +public GuestCount(int guestCount): void
+}
+
+class Seating
+{
+    
+
+    +GetGuestCount(): int
+    +SetGuestCount(guestCount: int): void
+
+    +Seating(int guestCount): void
+    +MinimalTables(): int
+    +AverageSeatingTables(): int
+}
+
+class DisplayMenu
+{
+    -_menu: FoodMenu
+    -_budget: Budget
+    -_guestCount: GuestCount
+
+    +DisplayMenu(string menuItems, double servingSize, double pricePerServing, int GuestCount, double Budget): void
+    +ShowMenu(): virtual void
+
+}
+
+class SaveAndLoad
+{
+    {static}+LoadMenu(): void
+    {static}+SaveMenu(): void
+}
+
+class Budget
+{
+    -_plannedBudget: double
+    -_actualBudget: double
+
+    +GetPlannedBudget(): double
+    +SetPlannedBudget(plannedBudget: double): void
+    +GetActualBudget(): double
+    +SetActualBudget(actualBudget: double): void
+    +Budget(double plannedBudget, double actualBudget): void
+}
+
+
+
+
+
+@enduml
