@@ -1,14 +1,13 @@
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Threading;
 
 class Seating : GuestCount
 {
     private int _seating;
 
-    public Seating(int guestCount, int seating) : base(guestCount)
+    public Seating(int guestCount) : base(guestCount)
     {
-        _seating = seating;
     }
 
     public void SetSeating(int seating)
@@ -18,13 +17,11 @@ class Seating : GuestCount
 
     public int MinimalTables()
     {
-        return GetGuestCount() / 8; //round tables hold 8 chairs
+        return (int)Math.Ceiling((double)GetGuestCount() / 8); //round tables hold 8 chairs
     }
 
     public int AverageSeatingTables()
     {
-        return GetGuestCount() / 6; //round table average seating is 6
+        return (int)Math.Ceiling((double)GetGuestCount() / 6); //round table average seating is 6
     }
-    
-    
 }
